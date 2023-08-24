@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import Employee from './Employee'
 
 function Home() {
   const [adminCount, setAdminCount] = useState()
@@ -44,21 +45,7 @@ function Home() {
       {/* List of admin  */}
       <div className='mt-4 px-5 pt-3'>
         <h3>List of Approvals</h3>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Employee Name</td>
-              <button className='btn btn-success btn-sm'>Approve</button>
-              <button className='btn btn-danger btn-sm '>Reject</button>
-            </tr>
-          </tbody>
-        </table>
+        <Employee />
       </div>
     </div>
   )

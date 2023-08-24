@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 
-function EditEmployee() {
+function EditEmployee({approve}) {
+	console.log(approve);
 	const [data, setData] = useState({
 		name: '',
 		email: '',
-		address: '',
 		contact: '',
 	})
 	const navigate = useNavigate()
@@ -26,6 +26,9 @@ function EditEmployee() {
 	}, [])
 
 	const handleSubmit = (event) => {
+		if(approve==="trigger"){
+			alert(`submited`)
+		}else{
 		event.preventDefault();
 		axios.put('http://localhost:7500/update/'+id, data)
 		.then(res => {
@@ -34,6 +37,7 @@ function EditEmployee() {
 			}
 		})
 		.catch(err => console.log(err));
+	}
 	}
   return (
     <div className='d-flex flex-column align-items-center pt-4'>
