@@ -8,6 +8,15 @@ function EditEmployee({approve}) {
 		name: '',
 		email: '',
 		contact: '',
+		comment: '',
+		oldemail:'',
+		oldcontact:''
+	})
+	const [sdata, setChangeData] = useState({
+		comment: '',
+		oldemail:'',
+		oldcontact:'',
+		
 	})
 	const navigate = useNavigate()
 	
@@ -19,7 +28,11 @@ function EditEmployee({approve}) {
 			setData({...data, name: res.data.Result[0].name,
 				email: res.data.Result[0].email,
 				address: res.data.Result[0].address,
-				contact: res.data.Result[0].contact
+				contact: res.data.Result[0].contact,
+				comment: res.data.Result[0].comment,
+				oldemail:res.data.Result[0].oldemail,
+				oldcontact:res.data.Result[0].oldcontact,
+				
 			})
 		})
 		.catch(err =>console.log(err));
@@ -27,7 +40,15 @@ function EditEmployee({approve}) {
 
 	const handleSubmit = (event) => {
 		if(approve==="trigger"){
-			alert(`submited`)
+			event.preventDefault();
+		axios.put('http://localhost:7500/updateapproval/'+id, sdata)
+		.then(res => {
+			if(res.data.Status === "Success") {
+				navigate('/employee')
+			}
+		})
+		.catch(err => console.log(err));
+			alert(`submited for approval`);
 		}else{
 		event.preventDefault();
 		axios.put('http://localhost:7500/update/'+id, data)
@@ -51,12 +72,17 @@ function EditEmployee({approve}) {
 				<div class="col-12">
 					<label for="inputEmail4" class="form-label">Email</label>
 					<input type="email" class="form-control" id="inputEmail4" placeholder='Enter Email' autoComplete='off'
-					onChange={e => setData({...data, email: e.target.value})} value={data.email}/>
+					onChange={e => {setData({...data, email: e.target.value});setChangeData({...sdata, oldemail: e.target.value})}} value={data.email}/>
 				</div>
 				<div class="col-12">
-					<label for="inputSalaryContact" class="form-label">Phone Number</label>
+					<label for="inputContact" class="form-label">Phone Number</label>
 					<input type="text" class="form-control" id="inputContact" placeholder="Enter Phone Number" autoComplete='off'
-					onChange={e => setData({...data, contact: e.target.value})} value={data.contact}/>
+					onChange={e => {setData({...data, contact: e.target.value});setChangeData({...sdata, oldcontact: e.target.value})}} value={data.contact}/>
+				</div>
+				<div class="col-12">
+					<label for="inputcommentt" class="form-label">Comment</label>
+					<input type="textarea" class="form-control" id="inputContact" placeholder="Enter Reason for change" autoComplete='off'
+					onChange={e => {setData({...data, comment: e.target.value});setChangeData({...sdata, comment: e.target.value})}}value={data.comment}/>
 				</div>
 				<div class="col-12">
 					<button type="submit" class="btn btn-primary">Update</button>

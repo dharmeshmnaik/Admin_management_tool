@@ -67,14 +67,31 @@ app.get('/get/:id', (req, res) => {
 
 app.put('/update/:id', (req, res) => {
     const id = req.params.id;
-    const sql = "UPDATE employee set contact = ?, email = ? WHERE id = ?";
-    con.query(sql, [req.body.contact,req.body.email, id], (err, result) => {
+    const sql = "UPDATE employee set contact = ?, email = ?, comment = ?, oldemail = ?, oldcontact = ? WHERE id = ?";
+    con.query(sql, [req.body.contact, req.body.email, req.body.comment, req.body.oldemail, req.body.oldcontact, id], (err, result) => {
         if(err) return res.json({Error: "update employee error in sql"});
         console.log(result)
         return res.json({Status: "Success"})
     })
 })
-
+app.put('/updateapproval/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = "UPDATE employee set oldemail = ?, oldcontact = ?, comment = ? WHERE id = ?";
+    con.query(sql, [req.body.oldemail, req.body.oldcontact, req.body.comment, id], (err, result) => {
+        if(err) return res.json({Error: "update employee error in sql"});
+        console.log(result)
+        return res.json({Status: "Success"})
+    })
+})
+app.put('/updateemployee/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = "UPDATE employee set contact = ?, email = ?,oldemail = ?, oldcontact = ?, comment = ? WHERE id = ?";
+    con.query(sql, [req.body.contact, req.body.email,req.body.oldemail, req.body.oldcontact, req.body.comment, id], (err, result) => {
+        if(err) return res.json({Error: "update employee error in sql"});
+        console.log(result)
+        return res.json({Status: "Success"})
+    })
+})
 app.delete('/delete/:id', (req, res) => {
     const id = req.params.id;
     const sql = "Delete FROM employee WHERE id = ?";
