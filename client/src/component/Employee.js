@@ -28,7 +28,7 @@ function Employee() {
     })
     .catch(err => console.log(err));
   }
-
+  const approveChange=() => {}
   return (
     <div className='px-5 py-3'>
       <div className='d-flex justify-content-center mt-2'>
@@ -44,6 +44,8 @@ function Employee() {
               <th>Contact</th>
               <th>Action</th>
               <th>Approvals</th>
+              <th>Upcomming Change</th>
+              <th>Reason for change</th>
             </tr>
           </thead>
           <tbody>
@@ -57,9 +59,11 @@ function Employee() {
                     <button onClick={e => handleDelete(employee.id)} className='btn btn-sm btn-danger'>delete</button>
                   </td>
                   <td>
-                  <button className='btn btn-success btn-sm'>Approve</button>
+                  <button className='btn btn-success btn-sm' onClick={approveChange}>Approve</button>
                   <button className='btn btn-danger btn-sm '>Reject</button>
                   </td>
+                  <td>Email:{employee.oldemail}, Contact:{employee.oldcontact}</td>
+                  <td>{employee.comment}</td>
               </tr>
             })}
           </tbody>
