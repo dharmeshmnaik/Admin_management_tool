@@ -40,9 +40,7 @@ function Employee() {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Image</th>
               <th>Email</th>
-              <th>Address</th>
               <th>Contact</th>
               <th>Action</th>
             </tr>
@@ -51,12 +49,8 @@ function Employee() {
             {data.map((employee, index) => {
               return <tr key={index}>
                   <td>{employee.name}</td>
-                  <td>{
-                    <img src={`http://localhost:7500/images/`+employee.image} alt="" className='employee_image'/>
-                    }</td>
                   <td>{employee.email}</td>
-                  <td>{employee.address}</td>
-                  <td>{employee.salary}</td>
+                  <td>{employee.contact}</td>
                   <td>
                     <Link to={`/employeeEdit/`+employee.id} className='btn btn-primary btn-sm me-2'>edit</Link>
                     <button onClick={e => handleDelete(employee.id)} className='btn btn-sm btn-danger'>delete</button>

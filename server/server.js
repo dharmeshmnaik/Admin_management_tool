@@ -11,7 +11,7 @@ var path = require('path');
 
 app.use(cors(
     {
-        origin: ["http://localhost:7500"],
+        origin: ["http://localhost:3000"],
         methods: ["POST", "GET", "PUT"],
         credentials: true
     }
@@ -27,18 +27,18 @@ const con = mysql2.createConnection({
     database: "login"
 })
 
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/images')
     },
     filename: (req, file, cb) => {
         cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
     }
-})
+})*/
 
-const upload = multer({
+/*const upload = multer({
     storage: storage
-})
+})*/
 
 con.connect(function(err) {
     if(err) {
@@ -67,9 +67,10 @@ app.get('/get/:id', (req, res) => {
 
 app.put('/update/:id', (req, res) => {
     const id = req.params.id;
-    const sql = "UPDATE employee set salary = ? WHERE id = ?";
-    con.query(sql, [req.body.salary, id], (err, result) => {
+    const sql = "UPDATE employee set contact = ? WHERE id = ?";
+    con.query(sql, [req.body.contact, id], (err, result) => {
         if(err) return res.json({Error: "update employee error in sql"});
+        console.log(result)
         return res.json({Status: "Success"})
     })
 })
@@ -126,6 +127,7 @@ app.get('/salary', (req, res) => {
 
 app.post('/login', (req, res) => {
     const sql = "SELECT * FROM users Where email = ? AND  password = ?";
+    //console.log(JSON.stringify)
     con.query(sql, [req.body.email, req.body.password], (err, result) => {
         if(err) return res.json({Status: "Error", Error: "Error in runnig query"});
         if(result.length > 0) {
@@ -140,9 +142,18 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/employeelogin', (req, res) => {
-    const sql = "SELECT * FROM employee Where email = ?";
-    con.query(sql, [req.body.email], (err, result) => {
+    const sql = "SELECT * FROM employee Where email = ? AND  password = ?";
+    con.query(sql, [req.body.email, req.body.password], (err, result) => {
         if(err) return res.json({Status: "Error", Error: "Error in runnig query"});
+        if(result.length > 0) {
+            //const id = result[0].id;
+            const token = jwt.sign({role: "employee", id: result[0].id}, "jwt-secret-key", {expiresIn: '1d'});
+            res.cookie('token', token);
+            return res.json({Status: "Success",id: result[0].id })
+        } else {
+            return res.json({Status: "Error", Error: "Wrong Email or Password"});
+        }
+        /*if(err) return res.json({Status: "Error", Error: "Error in runnig query"});
         if(result.length > 0) {
             bcrypt.compare(req.body.password.toString(), result[0].password, (err, response)=> {
                 if(err) return res.json({Error: "password error"});
@@ -156,9 +167,10 @@ app.post('/employeelogin', (req, res) => {
                 
             })
             
-        } else {
+        } 
+        else {
             return res.json({Status: "Error", Error: "Wrong Email or Password"});
-        }
+        }*/
     })
 })
 
@@ -169,20 +181,20 @@ app.get('/logout', (req, res) => {
     return res.json({Status: "Success"});
 })
 
-app.post('/create',upload.single('image'), (req, res) => {
-    const sql = "INSERT INTO employee (`name`,`email`,`password`, `address`, `salary`,`image`) VALUES (?)";
+app.post('/create', (req, res) => {
+    const sql = "INSERT INTO employee (`name`,`email`,`password`,`contact`) VALUES (?)";
     bcrypt.hash(req.body.password.toString(), 10, (err, hash) => {
         if(err) return res.json({Error: "Error in hashing password"});
         const values = [
             req.body.name,
             req.body.email,
             hash,
-            req.body.address,
-            req.body.salary,
-            req.file.filename
+            req.body.contact
+            
         ]
         con.query(sql, [values], (err, result) => {
             if(err) return res.json({Error: "Inside singup query"});
+            console.log(JSON.stringify(result))
             return res.json({Status: "Success"});
         })
     } )

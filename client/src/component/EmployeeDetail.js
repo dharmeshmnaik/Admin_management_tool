@@ -10,7 +10,7 @@ function EmployeeDetail() {
         axios.get('http://localhost:7500/get/'+id)
         .then(res => setEmployee(res.data.Result[0]))
         .catch(err => console.log(err));
-    })
+    },[])
     const handleLogout = () => {
 		axios.get('http://localhost:7500/logout')
 		.then(res => {
@@ -20,11 +20,10 @@ function EmployeeDetail() {
   return (
     <div>
         <div className='d-flex justify-content-center flex-column align-items-center mt-3'>
-            <img src={`http://localhost:7500/images/`+employee.image} alt="" className='empImg'/>
-            <div className='d-flex align-items-center flex-column mt-5'>
+              <div className='d-flex align-items-center flex-column mt-5'>
                 <h3>Name: {employee.name}</h3>
                 <h3>Email: {employee.email}</h3>
-                <h3>Salary: {employee.salary}</h3>
+                <h3>Contact: {employee.contact}</h3>
             </div>
             <div>
                 <button className='btn btn-primary me-2'>Edit</button>

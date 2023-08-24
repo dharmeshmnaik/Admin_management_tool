@@ -7,9 +7,7 @@ function AddEmployee() {
 		name: '',
 		email: '',
 		password: '',
-		address: '',
-		salary: '',
-		image: ''
+		contact: ''
 	})
 	const navigate = useNavigate()
 
@@ -19,9 +17,7 @@ function AddEmployee() {
 		formdata.append("name", data.name);
 		formdata.append("email", data.email);
 		formdata.append("password", data.password);
-		formdata.append("address", data.address);
-		formdata.append("salary", data.salary);
-		formdata.append("image", data.image);
+		formdata.append("contact", data.contact);
 		axios.post('http://localhost:7500/create', formdata)
 		.then(res => {
 			navigate('/employee')
@@ -48,19 +44,9 @@ function AddEmployee() {
 					 onChange={e => setData({...data, password: e.target.value})}/>
 				</div>
 				<div class="col-12">
-					<label for="inputSalary" class="form-label">Salary</label>
-					<input type="text" class="form-control" id="inputSalary" placeholder="Enter Salary" autoComplete='off'
-					onChange={e => setData({...data, salary: e.target.value})}/>
-				</div>
-				<div class="col-12">
-					<label for="inputAddress" class="form-label">Address</label>
-					<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" autoComplete='off'
-					onChange={e => setData({...data, address: e.target.value})}/>
-				</div>
-				<div class="col-12 mb-3">
-					<label class="form-label" for="inputGroupFile01">Select Image</label>
-					<input type="file" class="form-control" id="inputGroupFile01"
-					onChange={e => setData({...data, image: e.target.files[0]})}/>
+					<label for="inputcontact" class="form-label">contact</label>
+					<input type="text" class="form-control" id="inputcontact" placeholder="Enter contact" autoComplete='off'
+					onChange={e => setData({...data, contact: e.target.value})}/>
 				</div>
 				<div class="col-12">
 					<button type="submit" class="btn btn-primary">Create</button>

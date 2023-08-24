@@ -7,7 +7,7 @@ function EditEmployee() {
 		name: '',
 		email: '',
 		address: '',
-		salary: '',
+		contact: '',
 	})
 	const navigate = useNavigate()
 	
@@ -19,7 +19,7 @@ function EditEmployee() {
 			setData({...data, name: res.data.Result[0].name,
 				email: res.data.Result[0].email,
 				address: res.data.Result[0].address,
-				salary: res.data.Result[0].salary
+				contact: res.data.Result[0].contact
 			})
 		})
 		.catch(err =>console.log(err));
@@ -50,14 +50,9 @@ function EditEmployee() {
 					onChange={e => setData({...data, email: e.target.value})} value={data.email}/>
 				</div>
 				<div class="col-12">
-					<label for="inputSalary" class="form-label">Salary</label>
-					<input type="text" class="form-control" id="inputSalary" placeholder="Enter Salary" autoComplete='off'
-					onChange={e => setData({...data, salary: e.target.value})} value={data.salary}/>
-				</div>
-				<div class="col-12">
-					<label for="inputAddress" class="form-label">Address</label>
-					<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" autoComplete='off'
-					onChange={e => setData({...data, address: e.target.value})} value={data.address}/>
+					<label for="inputSalaryContact" class="form-label">Phone Number</label>
+					<input type="text" class="form-control" id="inputContact" placeholder="Enter Phone Number" autoComplete='off'
+					onChange={e => setData({...data, contact: e.target.value})} value={data.contact}/>
 				</div>
 				<div class="col-12">
 					<button type="submit" class="btn btn-primary">Update</button>
