@@ -43,6 +43,7 @@ function Employee() {
               <th>Email</th>
               <th>Contact</th>
               <th>Action</th>
+              <th>Approvals</th>
             </tr>
           </thead>
           <tbody>
@@ -54,6 +55,10 @@ function Employee() {
                   <td>
                     <Link to={`/employeeEdit/`+employee.id} className='btn btn-primary btn-sm me-2'>edit</Link>
                     <button onClick={e => handleDelete(employee.id)} className='btn btn-sm btn-danger'>delete</button>
+                  </td>
+                  <td>
+                  <button className='btn btn-success btn-sm'>Approve</button>
+                  <button className='btn btn-danger btn-sm '>Reject</button>
                   </td>
               </tr>
             })}

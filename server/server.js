@@ -67,8 +67,8 @@ app.get('/get/:id', (req, res) => {
 
 app.put('/update/:id', (req, res) => {
     const id = req.params.id;
-    const sql = "UPDATE employee set contact = ? WHERE id = ?";
-    con.query(sql, [req.body.contact, id], (err, result) => {
+    const sql = "UPDATE employee set contact = ?, email = ? WHERE id = ?";
+    con.query(sql, [req.body.contact,req.body.email, id], (err, result) => {
         if(err) return res.json({Error: "update employee error in sql"});
         console.log(result)
         return res.json({Status: "Success"})
