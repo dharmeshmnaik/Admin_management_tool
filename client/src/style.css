@@ -1,13 +1,13 @@
 .loginPage {
     
-    background: linear-gradient(rgba(11, 11, 11, 0.5), rgba(10, 10, 10, 0.5));
+    background: linear-gradient(rgba(21, 126, 164, 0.5), rgba(10, 10, 10, 0.5));
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 120%;
 }
 
 .loginForm {
-    background-color: rgba(1, 32, 93, 0.6);
+    background-color: rgba(76, 102, 155, 0.6);
     color: white;
 }
 

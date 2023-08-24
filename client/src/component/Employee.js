@@ -43,7 +43,7 @@ function Employee() {
               <th>Image</th>
               <th>Email</th>
               <th>Address</th>
-              <th>Salary</th>
+              <th>Contact</th>
               <th>Action</th>
             </tr>
           </thead>
