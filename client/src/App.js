@@ -10,6 +10,7 @@ import EditEmployee from './component/EditEmployee'
 import Start from './component/Start'
 import EmployeeDetail from './component/EmployeeDetail'
 import EmployeeLogin from './component/EmployeeLogin'
+import Approval from './component/Approval'
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/create' element={<AddEmployee />}></Route>
         <Route path='/employeeEdit/:id' element={<EditEmployee />}></Route>
+        <Route path='/approval/:id' element={<Approval />}></Route>
       </Route>
       <Route path='/login' element={<Login />}></Route>
       <Route path='/start' element={<Start />}></Route>
