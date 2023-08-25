@@ -56,8 +56,7 @@ function Approval({}) {
     }
 	const handleApprove = (event) => {
 		event.preventDefault();
-        //console.log(JSON.stringify(sdata))
-		axios.put('http://localhost:7500/update/'+id, sdata)
+        axios.put('http://localhost:7500/update/'+id, sdata)
 		.then(res => {
 			if(res.data.Status === "Success") {
 				navigate('/employee')
@@ -109,7 +108,7 @@ function Approval({}) {
 					{checked ? <button type="submit" class="btn btn-primary">Proceed?</button> :<><button type="button" onClick={(e) =>{handlecheck(e)}}class="btn btn-primary">Approve</button></>}
 				</div>
 			    <div class="col-12">
-					{lchecked ? <button type="button" class="btn btn-primary">Proceed?</button> :<><button type="button" onClick={(e) =>{handlereject(e)}}class="btn btn-primary">Reject</button></>}
+					{lchecked ? <button type="submit" class="btn btn-primary">Proceed?</button> :<><button type="button" onClick={(e) =>{handlereject(e)}}class="btn btn-primary">Reject</button></>}
 				</div>
             </form>
 		</div>

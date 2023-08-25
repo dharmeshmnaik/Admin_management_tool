@@ -2,7 +2,7 @@ import React from 'react'
 
 function Profile() {
   return (
-    <div>This Feature to be released soon!!</div>
+    <div  ><h2 justify-content='center' align-item='center'>This Feature to be released soon!!</h2></div>
   )
 }
 
