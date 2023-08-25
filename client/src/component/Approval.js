@@ -22,6 +22,7 @@ function Approval({}) {
 		
 	})
     const [checked, setChecked] = useState(false);
+    const [lchecked, setLchecked] = useState(false);
 	const navigate = useNavigate()
 	
 	const {id} = useParams();
@@ -44,10 +45,15 @@ function Approval({}) {
     const handlecheck =(e) => {
         setChecked(true); 
         setChangeData({...sdata, contact: data.oldcontact, email:data.oldemail, oldemail:"",oldcontact:"",comment:""});
-        
+        alert('approving request')
 
     }
-    
+    const handlereject =(e) => {
+        setLchecked(true); 
+        setChangeData({...sdata, contact: data.contact, email:data.email, oldemail:"",oldcontact:"",comment:""});
+        alert('rejecting request')
+
+    }
 	const handleApprove = (event) => {
 		event.preventDefault();
         //console.log(JSON.stringify(sdata))
@@ -55,7 +61,7 @@ function Approval({}) {
 		.then(res => {
 			if(res.data.Status === "Success") {
 				navigate('/employee')
-                alert(`sucessfull approved change!`)
+                alert(`Operation sucessful!`)
 			}
 		})
 		.catch(err => console.log(err));
@@ -102,7 +108,10 @@ function Approval({}) {
                 <div class="col-12">
 					{checked ? <button type="submit" class="btn btn-primary">Proceed?</button> :<><button type="button" onClick={(e) =>{handlecheck(e)}}class="btn btn-primary">Approve</button></>}
 				</div>
-			</form>
+			    <div class="col-12">
+					{lchecked ? <button type="button" class="btn btn-primary">Proceed?</button> :<><button type="button" onClick={(e) =>{handlereject(e)}}class="btn btn-primary">Reject</button></>}
+				</div>
+            </form>
 		</div>
   )
 }
