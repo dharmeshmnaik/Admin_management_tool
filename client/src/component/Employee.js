@@ -4,6 +4,14 @@ import { Link } from 'react-router-dom'
 
 function Employee() {
   const [data, setData] = useState([])
+  const [app, setApp] = useState({
+		name: '',
+		email: '',
+		contact: '',
+		comment: '',
+		oldemail:'',
+		oldcontact:''
+	})
 
   useEffect(()=> {
     axios.get('http://localhost:7500/getEmployee')
@@ -28,7 +36,11 @@ function Employee() {
     })
     .catch(err => console.log(err));
   }
-  const approveChange=() => {}
+  const approveChange=(id) => {
+    setApp(data[id])
+    console.log(app)
+
+  }
   return (
     <div className='px-5 py-3'>
       <div className='d-flex justify-content-center mt-2'>
@@ -59,8 +71,9 @@ function Employee() {
                     <button onClick={e => handleDelete(employee.id)} className='btn btn-sm btn-danger'>delete</button>
                   </td>
                   <td>
-                  <button className='btn btn-success btn-sm' onClick={approveChange}>Approve</button>
-                  <button className='btn btn-danger btn-sm '>Reject</button>
+                  {/*<button className='btn btn-success btn-sm' onClick={employee =>approveChange(employee.id)}>Approve</button>*/}
+                  <Link to={`/approval/`+employee.id} className='btn btn-success btn-sm me-2'>Pending Approvel</Link>
+                  
                   </td>
                   <td>Email:{employee.oldemail}, Contact:{employee.oldcontact}</td>
                   <td>{employee.comment}</td>
