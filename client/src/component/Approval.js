@@ -44,7 +44,7 @@ function Approval({}) {
 	}, [])
     const handlecheck =(e) => {
         setChecked(true); 
-        setChangeData({...sdata, contact: data.oldcontact, email:data.oldemail, oldemail:"",oldcontact:"",comment:""});
+        setChangeData({...sdata, contact: data.oldcontact ? data.oldcontact:data.contact, email:data.oldemail ? data.oldemail:data.email , oldemail:"",oldcontact:"",comment:""});
         alert('approving request')
 
     }
