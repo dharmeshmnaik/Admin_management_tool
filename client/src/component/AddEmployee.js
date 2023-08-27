@@ -20,8 +20,7 @@ function AddEmployee() {
 		formdata.append("contact", data.contact);
 		axios.post('http://localhost:7500/create', formdata)
 		.then(res => {
-			//navigate('/employee')
-			console.log(formdata)
+			navigate('/employee')
 		})
 		.catch(err => console.log(err));
 	}
