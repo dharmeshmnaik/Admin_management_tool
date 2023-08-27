@@ -200,21 +200,19 @@ app.get('/logout', (req, res) => {
 
 app.post('/create', (req, res) => {
     const sql = "INSERT INTO employee (`name`,`email`,`password`,`contact`) VALUES (?)";
-    bcrypt.hash(req.body.password.toString(), 10, (err, hash) => {
-        if(err) return res.json({Error: "Error in hashing password"});
-        const values = [
-            req.body.name,
-            req.body.email,
-            hash,
-            req.body.contact
-            
-        ]
-        con.query(sql, [values], (err, result) => {
-            if(err) return res.json({Error: "Inside singup query"});
-            console.log(JSON.stringify(result))
-            return res.json({Status: "Success"});
-        })
-    } )
+    const values = [
+        req.body.name,
+        req.body.email,
+        req.body.password,
+        req.body.contact
+        
+    ]
+    con.query(sql, [values], (err, result) => {
+        console.log(`server - ${values}`)
+        if(err) return res.json({Error: "Inside singup query"});
+        console.log(JSON.stringify(result))
+        return res.json({Status: "Success"});
+    })
 })
 
 app.listen(7500, ()=> {

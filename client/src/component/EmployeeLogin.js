@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import './../style.css'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
-function EmployeeLogin() {
+function EmployeeLogin({types}) {
 
     const [values, setValues] = useState({
         email: '',
@@ -34,7 +34,7 @@ function EmployeeLogin() {
                 <div className='text-danger'>
                     {error && error}
                 </div>
-                <h2>Employee Login</h2>
+                <h2>{types} Login</h2>
                 <form onSubmit={handleSubmit}>
                     <div className='mb-3'>
                         <label htmlFor="email"><strong>Email</strong></label>
@@ -49,6 +49,7 @@ function EmployeeLogin() {
                     <button type='submit' className='btn btn-success w-100 rounded-0'> Log in</button>
                     <p>You are agree to aour terms and policies</p>
                 </form>
+                <Link style={{color:"yellow",fontSize:"20px"}} to="/create">Register Employee</Link>
             </div>
         </div>
     )
