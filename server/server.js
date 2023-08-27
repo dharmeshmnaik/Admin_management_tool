@@ -170,24 +170,7 @@ app.post('/employeelogin', (req, res) => {
         } else {
             return res.json({Status: "Error", Error: "Wrong Email or Password"});
         }
-        /*if(err) return res.json({Status: "Error", Error: "Error in runnig query"});
-        if(result.length > 0) {
-            bcrypt.compare(req.body.password.toString(), result[0].password, (err, response)=> {
-                if(err) return res.json({Error: "password error"});
-                if(response) {
-                    const token = jwt.sign({role: "employee", id: result[0].id}, "jwt-secret-key", {expiresIn: '1d'});
-                    res.cookie('token', token);
-                    return res.json({Status: "Success", id: result[0].id})
-                } else {
-                    return res.json({Status: "Error", Error: "Wrong Email or Password"});
-                }
-                
-            })
-            
-        } 
-        else {
-            return res.json({Status: "Error", Error: "Wrong Email or Password"});
-        }*/
+        
     })
 })
 
