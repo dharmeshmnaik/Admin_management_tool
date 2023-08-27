@@ -21,8 +21,7 @@ function AddEmployee() {
 		axios.post('http://localhost:7500/create', data)
 		.then(res => {
 			navigate('/employee')
-			console.log(formdata)
-		})
+					})
 		.catch(err => console.log(err));
 	}
 	return (
